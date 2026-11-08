@@ -10,3 +10,10 @@ class UserMenuSG(StatesGroup):
 
 class AdminMenuSG(StatesGroup):
     menu = State()
+
+
+class MetricsSG(StatesGroup):
+    general = State()
+    send_left = State()
+    send_right = State()
+    period = State()

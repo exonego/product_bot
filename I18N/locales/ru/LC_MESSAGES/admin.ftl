@@ -29,11 +29,10 @@ admin-metrics-general-text =
 admin-metrics-general-button = 📆 За период
 admin-metrics-sendleft-text = Введите левую границу периода (дата в формате ДД.ММ.ГГГГ).
 admin-metrics-sendright-text = Введите правую границу периода (дата в формате ДД.ММ.ГГГГ).
-admin-metrics-ivalid-text = Правая граница периода не может быть больше левой!
+admin-metrics-invalid-text = Правая граница периода не может быть больше левой!
 
 admin-metrics-period-text =
     <b>С { $left } по { $right }:</b>
 
-    👥 Запустили бота впервые: { $users } чел.
-    🤑 Купили: { $paid } чел.
-    🔴 Покинули бота: { $dead } чел.
+    👥 Запустили бота впервые: { $first_starts } чел.
+    🤑 Купили: { $buys } чел.

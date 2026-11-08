@@ -32,13 +32,27 @@ class Users:
         return users.count_users
 
     @property
-    def count_active(self):
+    def count_alive(self):
         return users.count_alive
 
 
 @dataclass
 class Actions:
-    pass
+    @property
+    def count_first_starts(self):
+        return actions.count_first_starts
+
+    @property
+    def count_buys(self):
+        return actions.count_buys
+
+    @property
+    def add_first_start(self):
+        return actions.add_first_start
+
+    @property
+    def add_buy(self):
+        return actions.add_buy
 
 
 @dataclass

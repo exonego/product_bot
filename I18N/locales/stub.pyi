@@ -212,23 +212,22 @@ class AdminMetricsSendright:
     @staticmethod
     def text() -> Literal["""Введите правую границу периода (дата в формате ДД.ММ.ГГГГ)."""]: ...
 
-class AdminMetricsIvalid:
+class AdminMetricsInvalid:
     @staticmethod
     def text() -> Literal["""Правая граница периода не может быть больше левой!"""]: ...
 
 class AdminMetricsPeriod:
     @staticmethod
-    def text(*, dead: PossibleValue, left: PossibleValue, paid: PossibleValue, right: PossibleValue, users: PossibleValue) -> Literal["""&lt;b&gt;С { $left } по { $right }:&lt;/b&gt;
+    def text(*, buys: PossibleValue, first_starts: PossibleValue, left: PossibleValue, right: PossibleValue) -> Literal["""&lt;b&gt;С { $left } по { $right }:&lt;/b&gt;
 
-👥 Запустили бота впервые: { $users } чел.
-🤑 Купили: { $paid } чел.
-🔴 Покинули бота: { $dead } чел."""]: ...
+👥 Запустили бота впервые: { $first_starts } чел.
+🤑 Купили: { $buys } чел."""]: ...
 
 class AdminMetrics:
     general: AdminMetricsGeneral
     sendleft: AdminMetricsSendleft
     sendright: AdminMetricsSendright
-    ivalid: AdminMetricsIvalid
+    invalid: AdminMetricsInvalid
     period: AdminMetricsPeriod
 
 class Admin:

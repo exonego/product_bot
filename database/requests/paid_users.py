@@ -58,3 +58,11 @@ async def set_is_alive(session: AsyncSession, tg_id: int, is_alive: bool) -> Non
     user = await session.get(PaidUser, tg_id)
     user.is_alive = is_alive
     await session.commit()
+
+
+async def count_users(session: AsyncSession) -> int:
+    """Counts the number of users"""
+    stmt = select(func.count(PaidUser.tg_id)).where(PaidUser.role == Role.USER)
+    result = await session.execute(stmt)
+
+    return result.scalar()

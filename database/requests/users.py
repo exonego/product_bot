@@ -58,3 +58,21 @@ async def set_is_alive(session: AsyncSession, tg_id: int, is_alive: bool) -> Non
     user = await session.get(User, tg_id)
     user.is_alive = is_alive
     await session.commit()
+
+
+async def count_users(session: AsyncSession) -> int:
+    """Counts the number of users"""
+    stmt = select(func.count(User.tg_id)).where(User.role == Role.USER)
+    result = await session.execute(stmt)
+
+    return result.scalar()
+
+
+async def count_alive(session: AsyncSession) -> int:
+    """Возвращает количество 'живых' пользователей"""
+    stmt = select(func.count(User.tg_id)).where(
+        and_(User.role == Role.USER, User.is_alive == True, User.banned == False)
+    )
+    result = await session.execute(stmt)
+
+    return result.scalar()

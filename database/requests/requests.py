@@ -27,6 +27,14 @@ class Users:
     def set_is_alive(self):
         return users.set_is_alive
 
+    @property
+    def count_users(self):
+        return users.count_users
+
+    @property
+    def count_active(self):
+        return users.count_alive
+
 
 @dataclass
 class Actions:
@@ -54,6 +62,10 @@ class PaidUsers:
     @property
     def set_is_alive(self):
         return paid_users.set_is_alive
+
+    @property
+    def count_users(self):
+        return paid_users.count_users
 
 
 @dataclass

@@ -9,6 +9,7 @@ PossibleValue: TypeAlias = str | int | float | Decimal | bool | FluentType
 class TranslatorRunner:
     def get(self, path: str, **kwargs: PossibleValue) -> str: ...
     user: User
+    admin: Admin
 
 class UserMenuWindow1:
     @staticmethod
@@ -163,3 +164,74 @@ class User:
 
     @staticmethod
     def paid() -> Literal["""Похоже, у вас уже есть доступ! Просто перейдите в бота @mini_product_ai"""]: ...
+
+class AdminButton:
+    @staticmethod
+    def back() -> Literal["""⬅️ Назад"""]: ...
+    @staticmethod
+    def skip() -> Literal["""➡️ Пропустить"""]: ...
+    @staticmethod
+    def confirm() -> Literal["""✅ Подтвердить"""]: ...
+
+class AdminMenuButton:
+    @staticmethod
+    def metrics() -> Literal["""📊 Метрика"""]: ...
+    @staticmethod
+    def mailing() -> Literal["""✉️ Рассылка"""]: ...
+    @staticmethod
+    def user() -> Literal["""👥 Найти"""]: ...
+    @staticmethod
+    def price() -> Literal["""💵 Цена"""]: ...
+    @staticmethod
+    def leave() -> Literal["""🚪 Выйти"""]: ...
+
+class AdminMenu:
+    button: AdminMenuButton
+
+    @staticmethod
+    def text(*, price: PossibleValue) -> Literal["""&lt;b&gt;Добро пожаловать в админ-панель бота!&lt;/b&gt;
+
+Цена для продукта: { $price } ₽"""]: ...
+
+class AdminMetricsGeneral:
+    @staticmethod
+    def text(*, active: PossibleValue, dead: PossibleValue, paid: PossibleValue, users: PossibleValue) -> Literal["""&lt;b&gt;За все время:&lt;/b&gt;
+
+👥 Пользователей: { $users } чел.
+🤑 Купили: { $paid } чел.
+🟢 Активных: { $active } чел.
+🔴 Неактивных: { $dead } чел."""]: ...
+    @staticmethod
+    def button() -> Literal["""📆 За период"""]: ...
+
+class AdminMetricsSendleft:
+    @staticmethod
+    def text() -> Literal["""Введите левую границу периода (дата в формате ДД.ММ.ГГГГ)."""]: ...
+
+class AdminMetricsSendright:
+    @staticmethod
+    def text() -> Literal["""Введите правую границу периода (дата в формате ДД.ММ.ГГГГ)."""]: ...
+
+class AdminMetricsIvalid:
+    @staticmethod
+    def text() -> Literal["""Правая граница периода не может быть больше левой!"""]: ...
+
+class AdminMetricsPeriod:
+    @staticmethod
+    def text(*, dead: PossibleValue, left: PossibleValue, paid: PossibleValue, right: PossibleValue, users: PossibleValue) -> Literal["""&lt;b&gt;С { $left } по { $right }:&lt;/b&gt;
+
+👥 Запустили бота впервые: { $users } чел.
+🤑 Купили: { $paid } чел.
+🔴 Покинули бота: { $dead } чел."""]: ...
+
+class AdminMetrics:
+    general: AdminMetricsGeneral
+    sendleft: AdminMetricsSendleft
+    sendright: AdminMetricsSendright
+    ivalid: AdminMetricsIvalid
+    period: AdminMetricsPeriod
+
+class Admin:
+    button: AdminButton
+    menu: AdminMenu
+    metrics: AdminMetrics

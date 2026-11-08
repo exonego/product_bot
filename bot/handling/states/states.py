@@ -6,3 +6,7 @@ class UserMenuSG(StatesGroup):
     window2 = State()
     window3 = State()
     window4 = State()
+
+
+class AdminMenuSG(StatesGroup):
+    menu = State()

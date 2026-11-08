@@ -1,0 +1,21 @@
+# Secret data
+.env
+
+# Virtual environment
+.venv/
+
+# Python
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Tests and static analysis
+.mypy_cache/
+.pytest_cache/
+.coverage

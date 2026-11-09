@@ -13,8 +13,7 @@ admin-menu-text =
 
 admin-menu-button-metrics = 📊 Метрика
 admin-menu-button-mailing = ✉️ Рассылка
-admin-menu-button-user = 👥 Найти
-admin-menu-button-price = 💵 Цена
+admin-menu-button-price = 💵 Изменить Цену
 admin-menu-button-leave = 🚪 Выйти
 
 
@@ -36,3 +35,17 @@ admin-metrics-period-text =
 
     👥 Запустили бота впервые: { $first_starts } чел.
     🤑 Купили: { $buys } чел.
+
+
+admin-mailing-sendtext-text = Введите текст рассылки
+admin-mailing-sendmedia-text = Отправьте фото|видео|кружок (не более 30 Мб)
+admin-mailing-examle-text = Каждому пользователю без доступа в клуб будет отправлено следующее ⬇️
+admin-mailing-confirm-text = <b><i>Подтвердить??</i></b>
+admin-mailing-started-text =
+    ✅ Рассылка всем пользователям без доступа в клуб началась. По мере ее обработки вам будут приходить уведомления.
+    ⚙️ ID рассылки: { $mailing_id }
+
+    ⬇️ Нажмите на кнопку ниже для возвращения в меню
+
+
+admin-price-window-text = Задайте цену для товара, обязательно укажите копейки после точки! Формат: Р.КК

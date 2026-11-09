@@ -145,6 +145,53 @@ class UserMenu:
     window3: UserMenuWindow3
     window4: UserMenuWindow4
 
+class UserDelayed1:
+    @staticmethod
+    def text() -> Literal["""«А если я сделаю миник, а его никто не купит?»
+
+Вот поэтому я и предлагаю сначала разобраться с темой.
+
+Перед записью уроков нужно понять:
+
+Кому это нужно?
+В какой ситуации?
+Что человек уже пробовал?
+За какое решение он готов заплатить?
+
+Потому что можно неделю выбирать шрифты для обложки, а потом выяснить, что вы вообще не можете объяснить, зачем покупать ваш продукт.
+
+Обидно. Зато шрифт красивый 🫠
+
+В «Мини-продукте с AI» начинаем с вашего опыта, аудитории и проверки темы. Потом переходим к материалам и оформлению.
+
+Если именно на выборе темы вы сейчас застряли, посмотрите программу ещё раз 👇🏻"""]: ...
+    @staticmethod
+    def button() -> Literal["""Посмотреть программу"""]: ...
+
+class UserDelayed2:
+    @staticmethod
+    def text() -> Literal["""Давайте хотя бы сдвинем вашу идею с места.
+
+Откройте заметки и допишите:
+
+«Я могу помочь [кому] решить [какую задачу], чтобы человек смог [что сделать]».
+
+Без «раскрыть потенциал» и прочего тумана. Так, как объяснили бы знакомому.
+
+Получилось? Уже есть идея, которую можно проверить.
+
+Не получилось? Значит, сначала нужно разобраться с аудиторией и задачей. Это тоже полезно понять.
+
+Если хотите пройти весь путь по урокам, забирайте «Мини-продукт с AI» за 2 990 ₽.
+
+Будем выбирать тему, собирать материалы, упаковывать и готовить ваш продукт к продаже."""]: ...
+    @staticmethod
+    def button() -> Literal["""Хочу собрать свой миник"""]: ...
+
+class UserMailing:
+    @staticmethod
+    def button() -> Literal["""Хочу собрать свой миник"""]: ...
+
 class UserSpam:
     @staticmethod
     def warning() -> Literal["""Осторожно, не отправляйте сообщения так часто!"""]: ...
@@ -159,6 +206,9 @@ class UserInvoice:
 
 class User:
     menu: UserMenu
+    delayed1: UserDelayed1
+    delayed2: UserDelayed2
+    mailing: UserMailing
     spam: UserSpam
     invoice: UserInvoice
 
@@ -179,9 +229,7 @@ class AdminMenuButton:
     @staticmethod
     def mailing() -> Literal["""✉️ Рассылка"""]: ...
     @staticmethod
-    def user() -> Literal["""👥 Найти"""]: ...
-    @staticmethod
-    def price() -> Literal["""💵 Цена"""]: ...
+    def price() -> Literal["""💵 Изменить Цену"""]: ...
     @staticmethod
     def leave() -> Literal["""🚪 Выйти"""]: ...
 
@@ -230,7 +278,46 @@ class AdminMetrics:
     invalid: AdminMetricsInvalid
     period: AdminMetricsPeriod
 
+class AdminMailingSendtext:
+    @staticmethod
+    def text() -> Literal["""Введите текст рассылки"""]: ...
+
+class AdminMailingSendmedia:
+    @staticmethod
+    def text() -> Literal["""Отправьте фото|видео|кружок (не более 30 Мб)"""]: ...
+
+class AdminMailingExamle:
+    @staticmethod
+    def text() -> Literal["""Каждому пользователю без доступа в клуб будет отправлено следующее ⬇️"""]: ...
+
+class AdminMailingConfirm:
+    @staticmethod
+    def text() -> Literal["""&lt;b&gt;&lt;i&gt;Подтвердить??&lt;/i&gt;&lt;/b&gt;"""]: ...
+
+class AdminMailingStarted:
+    @staticmethod
+    def text(*, mailing_id: PossibleValue) -> Literal["""✅ Рассылка всем пользователям без доступа в клуб началась. По мере ее обработки вам будут приходить уведомления.
+⚙️ ID рассылки: { $mailing_id }
+
+⬇️ Нажмите на кнопку ниже для возвращения в меню"""]: ...
+
+class AdminMailing:
+    sendtext: AdminMailingSendtext
+    sendmedia: AdminMailingSendmedia
+    examle: AdminMailingExamle
+    confirm: AdminMailingConfirm
+    started: AdminMailingStarted
+
+class AdminPriceWindow:
+    @staticmethod
+    def text() -> Literal["""Задайте цену для товара, обязательно укажите копейки после точки! Формат: Р.КК"""]: ...
+
+class AdminPrice:
+    window: AdminPriceWindow
+
 class Admin:
     button: AdminButton
     menu: AdminMenu
     metrics: AdminMetrics
+    mailing: AdminMailing
+    price: AdminPrice

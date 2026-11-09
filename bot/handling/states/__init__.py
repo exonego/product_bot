@@ -1,3 +1,3 @@
-from .states import UserMenuSG, AdminMenuSG, MetricsSG
+from .states import UserMenuSG, AdminMenuSG, MetricsSG, MailingSG, PriceSG
 
-__all__ = ["UserMenuSG", "AdminMenuSG", "MetricsSG"]
+__all__ = ["UserMenuSG", "AdminMenuSG", "MetricsSG", "MailingSG", "PriceSG"]

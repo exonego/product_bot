@@ -17,3 +17,14 @@ class MetricsSG(StatesGroup):
     send_left = State()
     send_right = State()
     period = State()
+
+
+class MailingSG(StatesGroup):
+    send_media = State()
+    send_text = State()
+    confirm = State()
+    started = State()
+
+
+class PriceSG(StatesGroup):
+    window = State()

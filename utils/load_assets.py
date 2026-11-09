@@ -27,6 +27,12 @@ async def upload_assets(redis: Redis, bot: Bot, chat_id: int) -> dict[str, int]:
         "window4_media": {
             "path": "/product_bot/assets/window4_media.jpg",
         },
+        "delayed1_media": {
+            "path": "/product_bot_assets_delayed1_media.jpg",
+        },
+        "delayed2_media": {
+            "path": "/product_bot_assets_delayed2_media.jpg",
+        },
     }
 
     # Try to take file_id's from Redis

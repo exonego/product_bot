@@ -76,3 +76,36 @@ async def count_alive(session: AsyncSession) -> int:
     result = await session.execute(stmt)
 
     return result.scalar()
+
+
+async def get_count_for_mailing(session: AsyncSession) -> int:
+    """Returns count of Users for mailing"""
+    stmt = select(func.count(User.tg_id)).where(
+        and_(User.is_alive == True, User.banned == False)
+    )
+    result = await session.execute(stmt)
+
+    return result.scalar()
+
+
+async def get_batch_for_mailing(
+    session: AsyncSession, last_handled_tg_id: int
+) -> list[User]:
+    """Returns batch of 100 users for mailing"""
+    stmt = (
+        select(User)
+        .where(
+            and_(
+                User.is_alive == True,
+                User.banned == False,
+                User.tg_id > last_handled_tg_id,
+            )
+        )
+        .order_by(User.tg_id)
+        .limit(100)
+    )
+    result = await session.execute(stmt)
+    users = list(result.scalars().unique().all())
+    logger.debug(f"DB Query: last_id={last_handled_tg_id}, found={len(users)} users")
+
+    return users

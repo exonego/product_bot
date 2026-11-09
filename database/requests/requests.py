@@ -35,6 +35,14 @@ class Users:
     def count_alive(self):
         return users.count_alive
 
+    @property
+    def get_count_for_mailing(self):
+        return users.get_count_for_mailing
+
+    @property
+    def get_batch_for_mailing(self):
+        return users.get_batch_for_mailing
+
 
 @dataclass
 class Actions:

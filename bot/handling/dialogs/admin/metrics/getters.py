@@ -7,7 +7,6 @@ from fluentogram import TranslatorRunner
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import Requests
-from bot.enums import Level
 
 if TYPE_CHECKING:
     from I18N.locales.stub import TranslatorRunner  # type: ignore

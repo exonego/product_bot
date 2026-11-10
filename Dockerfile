@@ -1,5 +1,5 @@
 # build
-FROM python:3.12-slim-bullseye AS compile-image
+FROM python:3.12-slim-bookworm AS compile-image
 
 WORKDIR /product_bot
 
@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 
 
 # run
-FROM python:3.12-slim-bullseye AS run-image
+FROM python:3.12-slim-bookworm AS run-image
 
 WORKDIR /product_bot
 

@@ -63,7 +63,7 @@ async def send_invoice_handler(
         await callback.message.answer_invoice(
             title=i18n.user.invoice.title(),
             description=i18n.user.invoice.description(),
-            payload="club",
+            payload="product",
             provider_token=yoo_token.get_secret_value(),
             currency="RUB",
             prices=[LabeledPrice(label="RUB", amount=int(product_price * 100))],

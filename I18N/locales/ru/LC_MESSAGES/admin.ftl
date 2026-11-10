@@ -22,7 +22,7 @@ admin-metrics-general-text =
 
     👥 Пользователей: { $users } чел.
     🤑 Купили: { $paid } чел.
-    🟢 Активных: { $active } чел.
+    🟢 Активных: { $alive } чел.
     🔴 Неактивных: { $dead } чел.
 
 admin-metrics-general-button = 📆 За период
@@ -49,3 +49,8 @@ admin-mailing-started-text =
 
 
 admin-price-window-text = Задайте цену для товара, обязательно укажите копейки после точки! Формат: Р.КК
+
+admin-notify-buy = {$username ->
+        [no] ( username отсутствует )
+        *[other] { $username }
+    } (user_id=<code>{ $user_id }</code>) купил(а) доступ в бота!

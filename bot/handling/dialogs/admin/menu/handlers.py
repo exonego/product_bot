@@ -15,13 +15,13 @@ requests = Requests()
 async def start_metrics_handler(
     callback: CallbackQuery, button: Button, dialog_manager: DialogManager
 ) -> None:
-    await dialog_manager.start(state=MetricsSG.endurance)
+    await dialog_manager.start(state=MetricsSG.general)
 
 
 async def start_price_handler(
     callback: CallbackQuery, button: Button, dialog_manager: DialogManager
 ) -> None:
-    await dialog_manager.start(state=PriceSG.price)
+    await dialog_manager.start(state=PriceSG.window)
 
 
 async def start_mailing_handler(
@@ -33,4 +33,4 @@ async def start_mailing_handler(
 async def leave_handler(
     callback: CallbackQuery, button: Button, dialog_manager: DialogManager
 ) -> None:
-    await dialog_manager.start(state=UserMenuSG.start)
+    await dialog_manager.start(state=UserMenuSG.window1)

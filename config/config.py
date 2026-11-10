@@ -13,9 +13,7 @@ logger = logging.Logger(__name__)
 class BotSettings:
     token: SecretStr
     assets_chat_id: int
-    club_chat_id: int
     admin_ids: list[int]
-    admin_username: str
 
 
 @dataclass
@@ -87,9 +85,7 @@ def load_config(path: str | None = None) -> Config:
     bot = BotSettings(
         token=token,
         assets_chat_id=env.int("ASSETS_CHAT_ID"),
-        club_chat_id=env.int("CLUB_CHAT_ID"),
         admin_ids=env.list("ADMIN_IDS", subcast=int),
-        admin_username=env("ADMIN_USERNAME"),
     )
 
     db_name = env("POSTGRES_DB")

@@ -3,22 +3,15 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 
 from aiogram.types import Message, CallbackQuery
-from aiogram.enums import ContentType
-from aiogram_dialog import DialogManager, ShowMode
-from aiogram_dialog.widgets.kbd import Button, Back, Next
-from aiogram_dialog.widgets.input import ManagedTextInput, MessageInput
+from aiogram_dialog import DialogManager
+from aiogram_dialog.widgets.kbd import Button
+from aiogram_dialog.widgets.input import ManagedTextInput
 from fluentogram import TranslatorRunner
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from database import Requests
-from utils.checks import date_check
 
 if TYPE_CHECKING:
     from I18N.locales.stub import TranslatorRunner  # type: ignore
 
 logger = logging.getLogger(__name__)
-
-requests = Requests()
 
 
 async def back_to_start_handler(

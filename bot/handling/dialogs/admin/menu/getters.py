@@ -17,12 +17,9 @@ requests = Requests()
 
 
 async def start_getter(
-    dialog_manager: DialogManager,
-    i18n: TranslatorRunner,
-    redis: Redis,
-    **kwargs
+    dialog_manager: DialogManager, i18n: TranslatorRunner, redis: Redis, **kwargs
 ) -> dict[str, str]:
-    price = get_price(redis=redis)
+    price = await get_price(redis=redis)
 
     return {
         "admin_menu_text": i18n.admin.menu.text(price=price if price else "no"),

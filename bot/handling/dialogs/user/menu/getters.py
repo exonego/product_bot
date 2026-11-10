@@ -20,11 +20,11 @@ logger = logging.getLogger(__name__)
 async def window1_getter(
     dialog_manager: DialogManager,
     i18n: TranslatorRunner,
-    assets_ids: dict[str, str],
+    file_ids: dict[str, str],
     **kwargs
 ) -> dict[str, str | MediaAttachment]:
     media = MediaAttachment(
-        type=ContentType.PHOTO, file_id=MediaId(assets_ids.get("window1_media"))
+        type=ContentType.PHOTO, file_id=MediaId(file_ids.get("window1_media"))
     )
 
     return {
@@ -37,11 +37,11 @@ async def window1_getter(
 async def window2_getter(
     dialog_manager: DialogManager,
     i18n: TranslatorRunner,
-    assets_ids: dict[str, str],
+    file_ids: dict[str, str],
     **kwargs
 ) -> dict[str, str | MediaAttachment]:
     media = MediaAttachment(
-        type=ContentType.PHOTO, file_id=MediaId(assets_ids.get("window2_media"))
+        type=ContentType.PHOTO, file_id=MediaId(file_ids.get("window2_media"))
     )
 
     return {
@@ -54,11 +54,11 @@ async def window2_getter(
 async def window3_getter(
     dialog_manager: DialogManager,
     i18n: TranslatorRunner,
-    assets_ids: dict[str, str],
+    file_ids: dict[str, str],
     **kwargs
 ) -> dict[str, str | MediaAttachment]:
     media = MediaAttachment(
-        type=ContentType.PHOTO, file_id=MediaId(assets_ids.get("window3_media"))
+        type=ContentType.PHOTO, file_id=MediaId(file_ids.get("window3_media"))
     )
 
     return {
@@ -71,12 +71,12 @@ async def window3_getter(
 async def window4_getter(
     dialog_manager: DialogManager,
     i18n: TranslatorRunner,
-    assets_ids: dict[str, str],
+    file_ids: dict[str, str],
     redis: Redis,
     **kwargs
 ) -> dict[str, str | MediaAttachment]:
     media = MediaAttachment(
-        type=ContentType.PHOTO, file_id=MediaId(assets_ids.get("window4_media"))
+        type=ContentType.PHOTO, file_id=MediaId(file_ids.get("window4_media"))
     )
     price = await get_price(redis=redis)
     return {

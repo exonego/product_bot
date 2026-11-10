@@ -97,7 +97,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: infozigan_app
+    container_name: product_app
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=1
     dns:

@@ -1,7 +1,6 @@
 import logging
 
-from aiogram.enums import ContentType
-from aiogram_dialog import Dialog, Window, ShowMode
+from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.text import Format
 from aiogram_dialog.widgets.kbd import Button, Next, Back, SwitchTo
 from aiogram_dialog.widgets.input import TextInput
@@ -52,7 +51,7 @@ metrics_dialog = Dialog(
         state=MetricsSG.send_right,
     ),
     Window(
-        Format("{admin_metrics_period}"),
+        Format("{admin_metrics_period_text}"),
         SwitchTo(
             text=Format("{admin_button_back}"),
             id="switch_to_general",

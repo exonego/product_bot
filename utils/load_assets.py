@@ -28,10 +28,10 @@ async def upload_assets(redis: Redis, bot: Bot, chat_id: int) -> dict[str, int]:
             "path": "/product_bot/assets/window4_media.jpg",
         },
         "delayed1_media": {
-            "path": "/product_bot_assets_delayed1_media.jpg",
+            "path": "/product_bot/assets/delayed1_media.jpg",
         },
         "delayed2_media": {
-            "path": "/product_bot_assets_delayed2_media.jpg",
+            "path": "/product_bot/assets/delayed2_media.jpg",
         },
     }
 

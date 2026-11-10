@@ -17,6 +17,11 @@ class BotSettings:
 
 
 @dataclass
+class PaidBotSettings:
+    token: SecretStr
+
+
+@dataclass
 class DBSettings:
     dsn: PostgresDsn
 
@@ -57,6 +62,7 @@ class YooSettings:
 @dataclass
 class Config:
     bot: BotSettings
+    paid_bot: PaidBotSettings
     db: DBSettings
     redis: RedisSettings
     nats: NatsSettings
@@ -87,6 +93,12 @@ def load_config(path: str | None = None) -> Config:
         assets_chat_id=env.int("ASSETS_CHAT_ID"),
         admin_ids=env.list("ADMIN_IDS", subcast=int),
     )
+
+    paid_token = SecretStr(env("PAID_BOT_TOKEN"))
+    if not paid_token:
+        raise ValueError("PAID_BOT_TOKEN must not be empty")
+
+    paid_bot = PaidBotSettings(token=paid_token)
 
     db_name = env("POSTGRES_DB")
     db_host = env("POSTGRES_HOST") if _is_docker else "localhost"
@@ -125,6 +137,7 @@ def load_config(path: str | None = None) -> Config:
     logger.info("Configuration loaded successfully")
     return Config(
         bot=bot,
+        paid_bot=paid_bot,
         db=db,
         redis=redis,
         nats=nats,

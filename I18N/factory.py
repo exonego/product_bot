@@ -15,6 +15,7 @@ def i18n_factory() -> TranslatorHub:
                     filenames=[
                         f"{DIR_PATH}/ru/LC_MESSAGES/user.ftl",
                         f"{DIR_PATH}/ru/LC_MESSAGES/admin.ftl",
+                        f"{DIR_PATH}/ru/LC_MESSAGES/paid_user.ftl",
                     ],
                 ),
             )

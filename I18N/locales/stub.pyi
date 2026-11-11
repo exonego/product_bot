@@ -9,9 +9,8 @@ PossibleValue: TypeAlias = str | int | float | Decimal | bool | FluentType
 class TranslatorRunner:
     def get(self, path: str, **kwargs: PossibleValue) -> str: ...
     user: User
-    apaiduser: Apaiduser
-    paiduser: Paiduser
     admin: Admin
+    paiduser: Paiduser
 
 class UserMenuWindow1:
     @staticmethod
@@ -30,7 +29,8 @@ class UserMenuWindow1:
 
 Здесь хочу разобрать, как вы можете собрать продукт из своих знаний. И как подключить ChatGPT, чтобы не сидеть над каждым текстом до пенсии.
 
-Сначала покажу свой пример 👇🏻"""]: ...
+Сначала покажу свой пример 👇🏻
+Продолжая диалог вы принимаете &lt;a href=&#34;https://disk.yandex.ru/d/6InQnZr9Aul-3g&#34;&gt;публичную оферту и политику конфиденциальности&lt;/a&gt;"""]: ...
     @staticmethod
     def button() -> Literal["""Смотреть пример"""]: ...
 
@@ -194,7 +194,119 @@ class User:
     @staticmethod
     def buy() -> Literal["""Успешная оплата! Скорее начинай проходить уроки в @mini_product_ai"""]: ...
 
-class ApaiduserStepsStep1Text:
+class AdminButton:
+    @staticmethod
+    def back() -> Literal["""⬅️ Назад"""]: ...
+    @staticmethod
+    def skip() -> Literal["""➡️ Пропустить"""]: ...
+    @staticmethod
+    def confirm() -> Literal["""✅ Подтвердить"""]: ...
+
+class AdminMenuButton:
+    @staticmethod
+    def metrics() -> Literal["""📊 Метрика"""]: ...
+    @staticmethod
+    def mailing() -> Literal["""✉️ Рассылка"""]: ...
+    @staticmethod
+    def price() -> Literal["""💵 Изменить Цену"""]: ...
+    @staticmethod
+    def leave() -> Literal["""🚪 Выйти"""]: ...
+
+class AdminMenu:
+    button: AdminMenuButton
+
+    @staticmethod
+    def text(*, price: PossibleValue) -> Literal["""&lt;b&gt;Добро пожаловать в админ-панель бота!&lt;/b&gt;
+
+Цена для продукта: { $price } ₽"""]: ...
+
+class AdminMetricsGeneral:
+    @staticmethod
+    def text(*, alive: PossibleValue, dead: PossibleValue, paid: PossibleValue, users: PossibleValue) -> Literal["""&lt;b&gt;За все время:&lt;/b&gt;
+
+👥 Пользователей: { $users } чел.
+🤑 Купили: { $paid } чел.
+🟢 Активных: { $alive } чел.
+🔴 Неактивных: { $dead } чел."""]: ...
+    @staticmethod
+    def button() -> Literal["""📆 За период"""]: ...
+
+class AdminMetricsSendleft:
+    @staticmethod
+    def text() -> Literal["""Введите левую границу периода (дата в формате ДД.ММ.ГГГГ)."""]: ...
+
+class AdminMetricsSendright:
+    @staticmethod
+    def text() -> Literal["""Введите правую границу периода (дата в формате ДД.ММ.ГГГГ)."""]: ...
+
+class AdminMetricsInvalid:
+    @staticmethod
+    def text() -> Literal["""Правая граница периода не может быть больше левой!"""]: ...
+
+class AdminMetricsPeriod:
+    @staticmethod
+    def text(*, buys: PossibleValue, first_starts: PossibleValue, left: PossibleValue, right: PossibleValue) -> Literal["""&lt;b&gt;С { $left } по { $right }:&lt;/b&gt;
+
+👥 Запустили бота впервые: { $first_starts } чел.
+🤑 Купили: { $buys } чел."""]: ...
+
+class AdminMetrics:
+    general: AdminMetricsGeneral
+    sendleft: AdminMetricsSendleft
+    sendright: AdminMetricsSendright
+    invalid: AdminMetricsInvalid
+    period: AdminMetricsPeriod
+
+class AdminMailingSendtext:
+    @staticmethod
+    def text() -> Literal["""Введите текст рассылки"""]: ...
+
+class AdminMailingSendmedia:
+    @staticmethod
+    def text() -> Literal["""Отправьте фото|видео|кружок (не более 30 Мб)"""]: ...
+
+class AdminMailingExamle:
+    @staticmethod
+    def text() -> Literal["""Каждому пользователю без доступа в клуб будет отправлено следующее ⬇️"""]: ...
+
+class AdminMailingConfirm:
+    @staticmethod
+    def text() -> Literal["""&lt;b&gt;&lt;i&gt;Подтвердить??&lt;/i&gt;&lt;/b&gt;"""]: ...
+
+class AdminMailingStarted:
+    @staticmethod
+    def text(*, mailing_id: PossibleValue) -> Literal["""✅ Рассылка всем пользователям без доступа в клуб началась. По мере ее обработки вам будут приходить уведомления.
+⚙️ ID рассылки: { $mailing_id }
+
+⬇️ Нажмите на кнопку ниже для возвращения в меню"""]: ...
+
+class AdminMailing:
+    sendtext: AdminMailingSendtext
+    sendmedia: AdminMailingSendmedia
+    examle: AdminMailingExamle
+    confirm: AdminMailingConfirm
+    started: AdminMailingStarted
+
+class AdminPriceWindow:
+    @staticmethod
+    def text() -> Literal["""Задайте цену для товара, обязательно укажите копейки после точки! Формат: Р.КК"""]: ...
+
+class AdminPrice:
+    window: AdminPriceWindow
+
+class AdminNotify:
+    @staticmethod
+    def buy(*, user_id: PossibleValue, username: PossibleValue) -> Literal["""{ $username } (user_id=&lt;code&gt;{ $user_id }&lt;/code&gt;) купил(а) доступ в бота!"""]: ...
+
+class Admin:
+    button: AdminButton
+    menu: AdminMenu
+    metrics: AdminMetrics
+    mailing: AdminMailing
+    price: AdminPrice
+    notify: AdminNotify
+
+class PaiduserStepsStep1Text:
     @staticmethod
     def p1() -> Literal["""Привет 👋 начинай проходить шаги, но не просто смотри, а сразу делай параллельно со мной, и тогда ты сможешь создать свой мини-продукт за 2-3 дня. 
 Тебе понадобиться библиотека промптов забери ее тут 👉🏻 &lt;a href=&#34;https://drive.google.com/file/d/1l4ZUJnT61zBqGO84oO8weKVycOeYLGml/view?usp=drivesdk&#34;&gt;библиотека промптов&lt;/a&gt;
@@ -202,16 +314,15 @@ class ApaiduserStepsStep1Text:
 Чек лист перед вторым шагом
 
 ✅ Подготовить ChatGPT или любую другую нейросеть 
-✅ Открыть библиотеку промптов"""]: ...
+✅ Открыть библиотеку промптов
 
-class ApaiduserStepsStep1:
-    text: ApaiduserStepsStep1Text
+Продолжая диалог ты принимаешь &lt;a href=&#34;https://disk.yandex.ru/d/6InQnZr9Aul-3g&#34;&gt;политику конфиденциальности и обработку данных&lt;/a&gt;"""]: ...
 
-class ApaiduserSteps:
-    step1: ApaiduserStepsStep1
+class PaiduserStepsStep1:
+    text: PaiduserStepsStep1Text
 
-class Apaiduser:
-    steps: ApaiduserSteps
+    @staticmethod
+    def button() -> Literal["""Сделать второй шаг"""]: ...
 
 class PaiduserStepsStep2Text:
     @staticmethod
@@ -475,130 +586,14 @@ class PaiduserStepsStep7Text:
 class PaiduserStepsStep7:
     text: PaiduserStepsStep7Text
 
-class PaiduserStepsStep1:
-    @staticmethod
-    def button() -> Literal["""Сделать второй шаг"""]: ...
-
 class PaiduserSteps:
+    step1: PaiduserStepsStep1
     step2: PaiduserStepsStep2
     step3: PaiduserStepsStep3
     step4: PaiduserStepsStep4
     step5: PaiduserStepsStep5
     step6: PaiduserStepsStep6
     step7: PaiduserStepsStep7
-    step1: PaiduserStepsStep1
 
 class Paiduser:
     steps: PaiduserSteps
-
-class AdminButton:
-    @staticmethod
-    def back() -> Literal["""⬅️ Назад"""]: ...
-    @staticmethod
-    def skip() -> Literal["""➡️ Пропустить"""]: ...
-    @staticmethod
-    def confirm() -> Literal["""✅ Подтвердить"""]: ...
-
-class AdminMenuButton:
-    @staticmethod
-    def metrics() -> Literal["""📊 Метрика"""]: ...
-    @staticmethod
-    def mailing() -> Literal["""✉️ Рассылка"""]: ...
-    @staticmethod
-    def price() -> Literal["""💵 Изменить Цену"""]: ...
-    @staticmethod
-    def leave() -> Literal["""🚪 Выйти"""]: ...
-
-class AdminMenu:
-    button: AdminMenuButton
-
-    @staticmethod
-    def text(*, price: PossibleValue) -> Literal["""&lt;b&gt;Добро пожаловать в админ-панель бота!&lt;/b&gt;
-
-Цена для продукта: { $price } ₽"""]: ...
-
-class AdminMetricsGeneral:
-    @staticmethod
-    def text(*, alive: PossibleValue, dead: PossibleValue, paid: PossibleValue, users: PossibleValue) -> Literal["""&lt;b&gt;За все время:&lt;/b&gt;
-
-👥 Пользователей: { $users } чел.
-🤑 Купили: { $paid } чел.
-🟢 Активных: { $alive } чел.
-🔴 Неактивных: { $dead } чел."""]: ...
-    @staticmethod
-    def button() -> Literal["""📆 За период"""]: ...
-
-class AdminMetricsSendleft:
-    @staticmethod
-    def text() -> Literal["""Введите левую границу периода (дата в формате ДД.ММ.ГГГГ)."""]: ...
-
-class AdminMetricsSendright:
-    @staticmethod
-    def text() -> Literal["""Введите правую границу периода (дата в формате ДД.ММ.ГГГГ)."""]: ...
-
-class AdminMetricsInvalid:
-    @staticmethod
-    def text() -> Literal["""Правая граница периода не может быть больше левой!"""]: ...
-
-class AdminMetricsPeriod:
-    @staticmethod
-    def text(*, buys: PossibleValue, first_starts: PossibleValue, left: PossibleValue, right: PossibleValue) -> Literal["""&lt;b&gt;С { $left } по { $right }:&lt;/b&gt;
-
-👥 Запустили бота впервые: { $first_starts } чел.
-🤑 Купили: { $buys } чел."""]: ...
-
-class AdminMetrics:
-    general: AdminMetricsGeneral
-    sendleft: AdminMetricsSendleft
-    sendright: AdminMetricsSendright
-    invalid: AdminMetricsInvalid
-    period: AdminMetricsPeriod
-
-class AdminMailingSendtext:
-    @staticmethod
-    def text() -> Literal["""Введите текст рассылки"""]: ...
-
-class AdminMailingSendmedia:
-    @staticmethod
-    def text() -> Literal["""Отправьте фото|видео|кружок (не более 30 Мб)"""]: ...
-
-class AdminMailingExamle:
-    @staticmethod
-    def text() -> Literal["""Каждому пользователю без доступа в клуб будет отправлено следующее ⬇️"""]: ...
-
-class AdminMailingConfirm:
-    @staticmethod
-    def text() -> Literal["""&lt;b&gt;&lt;i&gt;Подтвердить??&lt;/i&gt;&lt;/b&gt;"""]: ...
-
-class AdminMailingStarted:
-    @staticmethod
-    def text(*, mailing_id: PossibleValue) -> Literal["""✅ Рассылка всем пользователям без доступа в клуб началась. По мере ее обработки вам будут приходить уведомления.
-⚙️ ID рассылки: { $mailing_id }
-
-⬇️ Нажмите на кнопку ниже для возвращения в меню"""]: ...
-
-class AdminMailing:
-    sendtext: AdminMailingSendtext
-    sendmedia: AdminMailingSendmedia
-    examle: AdminMailingExamle
-    confirm: AdminMailingConfirm
-    started: AdminMailingStarted
-
-class AdminPriceWindow:
-    @staticmethod
-    def text() -> Literal["""Задайте цену для товара, обязательно укажите копейки после точки! Формат: Р.КК"""]: ...
-
-class AdminPrice:
-    window: AdminPriceWindow
-
-class AdminNotify:
-    @staticmethod
-    def buy(*, user_id: PossibleValue, username: PossibleValue) -> Literal["""{ $username } (user_id=&lt;code&gt;{ $user_id }&lt;/code&gt;) купил(а) доступ в бота!"""]: ...
-
-class Admin:
-    button: AdminButton
-    menu: AdminMenu
-    metrics: AdminMetrics
-    mailing: AdminMailing
-    price: AdminPrice
-    notify: AdminNotify

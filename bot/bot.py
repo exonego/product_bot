@@ -23,6 +23,7 @@ from bot.handling.middlewares import (
     ThrottlingMiddleware,
     RoleMiddleware,
 )
+from bot_paid.bot import start_paid_bot
 from config.config import Config
 from I18N import i18n_factory
 from utils.load_assets import upload_assets
@@ -54,7 +55,10 @@ async def main(config: Config) -> None:
     )
     storage = RedisStorage(
         redis=redis,
-        key_builder=DefaultKeyBuilder(with_destiny=True),
+        key_builder=DefaultKeyBuilder(
+            prefix="product_bot",
+            with_destiny=True,
+        ),
     )
 
     # Create sqlalchemy engine to connect db
@@ -124,7 +128,10 @@ async def main(config: Config) -> None:
 
     # Upload assets
     file_ids = await upload_assets(
-        redis=redis, bot=tg_bot, chat_id=config.bot.assets_chat_id
+        redis=redis,
+        bot=tg_bot,
+        chat_id=config.bot.assets_chat_id,
+        bot_type="main",
     )
 
     # Start
@@ -142,6 +149,12 @@ async def main(config: Config) -> None:
                 stream_delayed=config.nats.stream_delayed,
                 subject_splitter=config.nats.subject_splitter,
                 stream_splitter=config.nats.stream_splitter,
+            ),
+            start_paid_bot(
+                config=config,
+                redis=redis,
+                Sessionmaker=Sessionmaker,
+                translator_hub=translator_hub,
             ),
             start_delayed_consumer(
                 js=js,
